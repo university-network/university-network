@@ -1,0 +1,14 @@
+DROP TABLE users;
+DROP TABLE students;
+DROP TABLE teachers;
+DROP TABLE groups;
+DROP TABLE disciplines;
+DROP TABLE taught_disciplines;
+DROP TABLE tests;
+DROP TABLE test_questions;
+DROP TABLE student_answers;
+DROP TABLE articles;
+DROP TABLE materials;
+DROP TABLE messages;
+DROP TABLE actions;
+DROP TABLE log_events;

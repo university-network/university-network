@@ -1,0 +1,6 @@
+{
+  "notEmpty": "Missing param",
+  "isInt": "Param must be an integer",
+  "isAlpha": "Param must contain only Latin letters",
+  "isEmail": "Param must be a valid email address"
+}

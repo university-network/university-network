@@ -1,0 +1,25 @@
+{
+  "dev": {
+    "driver": "pg",
+    "database": "university-network",
+    "user": "university-network",
+    "password": "123456"
+  },
+  "test": {
+    "driver": "pg",
+    "database": "university-network-test",
+    "user": "university-network-test",
+    "password": "123456"
+  },
+  "prod": {
+    "driver": "pg",
+    "database": "university-network-production",
+    "user": "university-network-production",
+    "password": "123456"
+  },
+  "pg": {
+    "driver": "pg",
+    "host": "localhost"
+  },
+  "sql-file" : true
+}
