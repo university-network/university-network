@@ -41,7 +41,7 @@ function getGroupSchedule(req, res, next) {
 
 function createDiscipline(req, res, next) {
     var params = {
-        name: req.body.name
+        name: req.body.discipline_name
     };
 
     disciplines.create(params, function (error, result) {

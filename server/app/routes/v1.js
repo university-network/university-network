@@ -8,7 +8,7 @@ app.get('/api/v1/articles', controllers.articles.index);
 
 app.get('/api/v1/disciplines', controllers.disciplines.index);
 app.post('/api/v1/disciplines', controllers.disciplines.create);
-app.get('/api/v1/disciplines/schedule', controllers.disciplines.schedule);
+app.get('/api/v1/groups/:id/disciplines', controllers.disciplines.schedule);
 
 app.get('/api/v1/groups', controllers.groups.index);
 
@@ -22,12 +22,12 @@ app.get('/api/v1/student_answers', controllers.student_answers.index);
 
 app.get('/api/v1/students', controllers.students.index);
 app.post('/api/v1/students', controllers.students.create);
-app.get('/api/v1/students/grouplist', controllers.students.grouplist);
+app.get('/api/v1/groups/:id/students', controllers.students.grouplist);
 
 app.get('/api/v1/taught_disciplines', controllers.taught_disciplines.index);
 
 app.get('/api/v1/teachers', controllers.teachers.index);
-app.get('/api/v1/teachers/my_teachers', controllers.teachers.myTeachers);
+app.get('/api/v1/students/:id/teachers', controllers.teachers.myTeachers);
 
 app.get('/api/v1/tests', controllers.tests.index);
 
