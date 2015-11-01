@@ -1,7 +1,6 @@
 .bottom-tab
 {
     text-align: center;
-
 }
 
 .upper-tab
@@ -13,5 +12,20 @@
 {
     width:800px;
     height:100%;
+    margin:auto;
+}
+
+.for-avatar
+{
+    height:50%;
+}
+
+.login-area
+{
+    width:400px;
+}
+
+.login-window
+{
     margin:auto;
 }

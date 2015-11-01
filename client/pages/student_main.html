@@ -1,10 +1,332 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="university-network">
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>students main page</title>
+    <link rel="stylesheet" href="../build/stylesheets/custom.css" type="text/css">
+    <link rel="stylesheet" href="../build/stylesheets/vendor.css" type="text/css">
 </head>
 <body>
+<p>{{"hello"+"world"}}</p>
 
+<div class="modal fade" id="loginWindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Вход в систему</h4>
+            </div>
+            <div class="modal-body login-area">
+                <form class="form-signin">
+                    <label for="inputLogin" class="sr-only">Логин</label>
+                    <input type="login" id="inputLogin" class="form-control" placeholder="Логин" required autofocus>
+                    <label for="inputPassword" class="sr-only">Пароль</label>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="remember-me"> Запомнить меня
+                        </label>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="site-center-main">
+    <div class="upper-tab">
+        <div class="col-lg-7" ng-controller="StudentController as stud">
+            <div ng-repeat="student in stud.products">
+                <h1>{{student.name}}</h1>
+                <h2>{{student.email}}</h2>
+                <p>{{student.group_id}}</p>
+                <p ng-show="student.was_absent">ЗРАДА</p>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Вход</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="panel panel-info for-avatar">
+                        Вы не представились системе.
+                    </div>
+                    <div>
+                        <button type="button" id="btnEnter" class="btn btn-success"
+                                data-toggle="modal" data-target="#loginWindow" autocomplete="off">
+                            Войти
+                        </button>
+                        <button type="button" id="btnReg" class="btn btn-primary" autocomplete="off">
+                            Зарегистрироваться
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-tab">
+        <div class="col-md-3">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" class="active"><a href="#">Расписание</a></li>
+                <li role="presentation"><a href="#">Сообщения</a></li>
+                <li role="presentation"><a href="#">Тесты</a></li>
+                <li role="presentation"><a href="#">Предметы</a></li>
+                <li role="presentation"><a href="#">Лабораторные работы</a></li>
+            </ul>
+        </div>
+        <div class="panel-body col-md-9">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel"
+                 style="height:800px; background-color: whitesmoke">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active" style="height:700px">
+                        <div class="carousel-caption">
+                            <h1>Распознавание образов</h1>
+
+                            <h2>Лекции:</h2>
+                            <ul id="lectures-list1">
+                                <li>
+                                    <a href="...">
+                                        Лекция 1. Основные понятия теории распознавания образов.
+                                    </a>
+                                    <a class="glyphicon glyphicon-save" href="..."
+                                       data-toggle="tooltip"
+                                       data-placement="top"
+                                       title="Скачать как PDF">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="...">
+                                        Лекция 2. Постановка задачи классификации. Алгоритмы классификации.
+                                    </a>
+                                    <a class="glyphicon glyphicon-save" href="..."
+                                       data-toggle="tooltip"
+                                       data-placement="top"
+                                       title="Скачать как PDF">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="...">
+                                        Лекция 3. Метод ближайшего соседа.
+                                    </a>
+                                    <a class="glyphicon glyphicon-save"
+                                       data-toggle="tooltip"
+                                       data-placement="top"
+                                       title="Скачать как PDF">
+                                    </a>
+                                </li>
+                            </ul>
+                            <h2>Материалы</h2>
+                            <ol>
+                                <li>
+                                    <a>
+                                        <span class="glyphicon glyphicon-save"
+                                              data-toggle="tooltip"
+                                              data-placement="top"
+                                              title="Скачать как PDF">
+                                        </span>
+                                        Пример лабораторной работы
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="glyphicon glyphicon-save"
+                                              data-toggle="tooltip"
+                                              data-placement="top"
+                                              title="Скачать как PDF">
+                                        </span>
+                                        Еще какая-то ерунда
+                                    </a>
+                                </li>
+                            </ol>
+                            <h2>Тесты</h2>
+                            <ol>
+                                <li>
+                                    <a>
+                                        <span class="glyphicon glyphicon-ok-circle" style="color: green"></span>
+                                        Иерархические методы классификации
+                                        <span class="badge">16/20</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="glyphicon glyphicon-ok-circle" style="color: green"></span>
+                                        Нейронные сети
+                                        <span class="badge">9/10</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="glyphicon glyphicon-remove-circle" style="color: red"></span>
+                                        Алгоритмы семейства FOREL
+                                        <span class="badge">6/20</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="glyphicon glyphicon-plus-sign" style="color: blue"></span>
+                                        Оценки качества классификации
+                                        <span class="badge">0/20</span>
+                                    </a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="item" style="height:400px">
+                        <div class="carousel-caption">
+                            <h1>Матан</h1>
+
+                            <h2>Лекции:</h2>
+                            <ul id="lectures-list2">
+                                <li>
+                                    <a href="...">
+                                        Лекция 1. Основные понятия теории распознавания образов.
+                                    </a>
+                                    <a class="glyphicon glyphicon-save" href="..."
+                                       data-toggle="tooltip"
+                                       data-placement="top"
+                                       title="Скачать как PDF">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="...">
+                                        Лекция 2. Постановка задачи классификации. Алгоритмы классификации.
+                                    </a>
+                                    <a class="glyphicon glyphicon-save" href="..."
+                                       data-toggle="tooltip"
+                                       data-placement="top"
+                                       title="Скачать как PDF">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="...">
+                                        Лекция 3. Метод ближайшего соседа.
+                                    </a>
+                                    <a class="glyphicon glyphicon-save"
+                                       data-toggle="tooltip"
+                                       data-placement="top"
+                                       title="Скачать как PDF">
+                                    </a>
+                                </li>
+                            </ul>
+                            <h2>Материалы</h2>
+                            <ol>
+                                <li>
+                                    <a>
+                                        <span class="glyphicon glyphicon-save"
+                                              data-toggle="tooltip"
+                                              data-placement="top"
+                                              title="Скачать как PDF">
+                                        </span>
+                                        Пример лабораторной работы
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="glyphicon glyphicon-save"
+                                              data-toggle="tooltip"
+                                              data-placement="top"
+                                              title="Скачать как PDF">
+                                        </span>
+                                        Еще какая-то ерунда
+                                    </a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="item" style="height:400px">
+                        <div class="carousel-caption">
+                            <h1>Базы данных</h1>
+
+                            <h2>Лекции:</h2>
+                            <ul id="lectures-list3">
+                                <li>
+                                    <a href="...">
+                                        Лекция 1. Основные понятия теории распознавания образов.
+                                    </a>
+                                    <a class="glyphicon glyphicon-save" href="..."
+                                       data-toggle="tooltip"
+                                       data-placement="top"
+                                       title="Скачать как PDF">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="...">
+                                        Лекция 2. Постановка задачи классификации. Алгоритмы классификации.
+                                    </a>
+                                    <a class="glyphicon glyphicon-save" href="..."
+                                       data-toggle="tooltip"
+                                       data-placement="top"
+                                       title="Скачать как PDF">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="...">
+                                        Лекция 3. Метод ближайшего соседа.
+                                    </a>
+                                    <a class="glyphicon glyphicon-save"
+                                       data-toggle="tooltip"
+                                       data-placement="top"
+                                       title="Скачать как PDF">
+                                    </a>
+                                </li>
+                            </ul>
+                            <h2>Материалы</h2>
+                            <ol>
+                                <li>
+                                    <a>
+                                        <span class="glyphicon glyphicon-save"
+                                              data-toggle="tooltip"
+                                              data-placement="top"
+                                              title="Скачать как PDF">
+                                        </span>
+                                        Пример лабораторной работы
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <span class="glyphicon glyphicon-save"
+                                              data-toggle="tooltip"
+                                              data-placement="top"
+                                              title="Скачать как PDF">
+                                        </span>
+                                        Еще какая-то ерунда
+                                    </a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../build/scripts/vendor.js"></script>
+<script src="../../node_modules/angular/angular.min.js"></script>
+<script src="../scripts/js/ang-app.js"></script>
 </body>
 </html>
