@@ -8,6 +8,7 @@
     "express": "^4.13.3",
     "express-error-handler": "^1.0.1",
     "jsonschema": "^1.0.2",
+    "jsonwebtoken": "^5.4.1",
     "pg": "^4.4.3",
     "validator": "^4.2.0"
   }
