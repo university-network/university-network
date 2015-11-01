@@ -59,7 +59,34 @@ function createUser(params, callback) {
     });
 }
 
+function findUserByEmail(email, callback) {
+    var query = [
+        'SELECT',
+        '   id,',
+        '   name,',
+        '   email,',
+        '   photo,',
+        '   login,',
+        '   access_level,',
+        '   password_hash',
+        'FROM users',
+        'WHERE email = $1'
+    ].join('\n');
+
+    var data = [email];
+
+    db.query(query, data, function (err, result, done) {
+        done();
+
+        if (err) {
+            return callback(err);
+        }
+        callback(err, result);
+    });
+}
+
 module.exports = {
     getAll: getAll,
-    create:createUser
+    create: createUser,
+    findByEmail: findUserByEmail
 };
