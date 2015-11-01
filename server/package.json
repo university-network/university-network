@@ -2,6 +2,7 @@
   "name": "university-network",
   "version": "0.0.1",
   "dependencies": {
+    "bcrypt": "^0.8.5",
     "body-parser": "^1.14.1",
     "cors": "^2.7.1",
     "db-migrate": "^0.9.23",

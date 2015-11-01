@@ -1,5 +1,7 @@
 var users = require('../models/users');
 var validator = require('../../lib/validator');
+var registration = require('../services/registration');
+var serializer = require('../serializers/user');
 
 function getAllUsers(req, res, next) {
     users.getAll(function (error, result) {
@@ -56,21 +58,20 @@ function validateUser(req, res, next) {
 
 function createUser(req, res, next) {
     var params = {
-        name: req.body.name,
-        email: req.body.email,
-        photo: req.body.photo,
-        access_level: req.body.access_level,
-        login: req.body.login,
-        password_hash: req.body.password_hash,
+        name: req.body.user.name,
+        email: req.body.user.email,
+        photo: req.body.user.photo,
+        access_level: req.body.user.access_level,
+        login: req.body.user.login,
+        password: req.body.user.password
     };
 
-    users.create(params, function (error, result) {
-        if (error) {
-            console.error('error running query', error);
-            return next(error);
+    registration.register(params, function (err, createdUser) {
+        if (err) {
+            return next(err);
         }
-        res.status(201);
-        res.json(result.rows[0]);
+        var serializedUser = serializer.serializeOne(createdUser);
+        res.status(201).json(serializedUser);
     });
 }
 

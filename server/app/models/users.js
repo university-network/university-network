@@ -31,7 +31,13 @@ function createUser(params, callback) {
         '   login,',
         '   password_hash)',
         'VALUES',
-        '   ($1,$2,$3,$4,$5,md5($6))'
+        '   ($1,$2,$3,$4,$5,$6)',
+        'RETURNING',
+        '   id,',
+        '   name,',
+        '   email,',
+        '   photo,',
+        '   access_level'
     ].join('\n');
 
     var data = [
