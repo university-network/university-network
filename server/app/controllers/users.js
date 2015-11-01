@@ -11,31 +11,43 @@ function getAllUsers(req, res, next) {
     });
 }
 
-function validateUser(req,res,next) {
+function validateUser(req, res, next) {
     var schema = {
-        query: {
-            name: {
-                notEmpty: validator.messages.notEmpty,
-                isAlpha: validator.messages.isAlpha
-            },
-            email:{
-                notEmpty: validator.messages.notEmpty,
-                isEmail: validator.messages.isEmail
-            },
-            photo:{},
-            access_level:
-            {
-                notEmpty: validator.messages.notEmpty,
-                isInt: validator.messages.isInt
-            },
-            login: {
-                notEmpty: validator.messages.notEmpty,
-                isAlpha: validator.messages.isAlpha
-            },
-            password_hash:{
-                notEmpty: validator.messages.notEmpty
+        body: {
+            type: 'object',
+            required: ['user'],
+            properties: {
+                user: {
+                    type: 'object',
+                    required: ['name', 'email', 'access_level','login', 'password'],
+                    properties: {
+                        name: {
+                            type: 'string',
+                            minLength: 3,
+                            maxLength: 80
+                        },
+                        email: {
+                            type: 'string',
+                            format: 'email',
+                            minLength: 3,
+                            maxLength: 255
+                        },
+                        access_level: {
+                            type: 'int'
+                        },
+                        login: {
+                            type: 'string',
+                            minLength: 3,
+                            maxLength: 80
+                        },
+                        password: {
+                            type: 'string',
+                            minLength: 8,
+                            maxLength: 255
+                        }
+                    }
+                }
             }
-
         }
     };
 
