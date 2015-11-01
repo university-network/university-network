@@ -2,11 +2,14 @@
   "name": "university-network",
   "version": "0.0.1",
   "dependencies": {
+    "bcrypt": "^0.8.5",
     "body-parser": "^1.14.1",
     "cors": "^2.7.1",
     "db-migrate": "^0.9.23",
     "express": "^4.13.3",
     "express-error-handler": "^1.0.1",
+    "jsonschema": "^1.0.2",
+    "jsonwebtoken": "^5.4.1",
     "pg": "^4.4.3",
     "validator": "^4.2.0"
   }

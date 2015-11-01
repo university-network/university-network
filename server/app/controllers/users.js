@@ -1,5 +1,7 @@
 var users = require('../models/users');
 var validator = require('../../lib/validator');
+var registration = require('../services/registration');
+var serializer = require('../serializers/user');
 
 function getAllUsers(req, res, next) {
     users.getAll(function (error, result) {
@@ -11,31 +13,43 @@ function getAllUsers(req, res, next) {
     });
 }
 
-function validateUser(req,res,next) {
+function validateUser(req, res, next) {
     var schema = {
-        query: {
-            name: {
-                notEmpty: validator.messages.notEmpty,
-                isAlpha: validator.messages.isAlpha
-            },
-            email:{
-                notEmpty: validator.messages.notEmpty,
-                isEmail: validator.messages.isEmail
-            },
-            photo:{},
-            access_level:
-            {
-                notEmpty: validator.messages.notEmpty,
-                isInt: validator.messages.isInt
-            },
-            login: {
-                notEmpty: validator.messages.notEmpty,
-                isAlpha: validator.messages.isAlpha
-            },
-            password_hash:{
-                notEmpty: validator.messages.notEmpty
+        body: {
+            type: 'object',
+            required: ['user'],
+            properties: {
+                user: {
+                    type: 'object',
+                    required: ['name', 'email', 'access_level','login', 'password'],
+                    properties: {
+                        name: {
+                            type: 'string',
+                            minLength: 3,
+                            maxLength: 80
+                        },
+                        email: {
+                            type: 'string',
+                            format: 'email',
+                            minLength: 3,
+                            maxLength: 255
+                        },
+                        access_level: {
+                            type: 'int'
+                        },
+                        login: {
+                            type: 'string',
+                            minLength: 3,
+                            maxLength: 80
+                        },
+                        password: {
+                            type: 'string',
+                            minLength: 8,
+                            maxLength: 255
+                        }
+                    }
+                }
             }
-
         }
     };
 
@@ -44,21 +58,20 @@ function validateUser(req,res,next) {
 
 function createUser(req, res, next) {
     var params = {
-        name: req.body.name,
-        email: req.body.email,
-        photo: req.body.photo,
-        access_level: req.body.access_level,
-        login: req.body.login,
-        password_hash: req.body.password_hash,
+        name: req.body.user.name,
+        email: req.body.user.email,
+        photo: req.body.user.photo,
+        access_level: req.body.user.access_level,
+        login: req.body.user.login,
+        password: req.body.user.password
     };
 
-    users.create(params, function (error, result) {
-        if (error) {
-            console.error('error running query', error);
-            return next(error);
+    registration.register(params, function (err, createdUser) {
+        if (err) {
+            return next(err);
         }
-        res.status(201);
-        res.json(result.rows[0]);
+        var serializedUser = serializer.serializeOne(createdUser);
+        res.status(201).json(serializedUser);
     });
 }
 

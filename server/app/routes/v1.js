@@ -36,4 +36,6 @@ app.get('/api/v1/test_questions', controllers.test_questions.index);
 app.get('/api/v1/users', controllers.users.index);
 app.post('/api/v1/users', controllers.users.create);
 
+app.post('/api/v1/sessions', controllers.sessions.create);
+
 module.exports = app;

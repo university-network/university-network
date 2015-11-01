@@ -6,6 +6,7 @@ module.exports = {
     log_events: require('./log_events'),
     materials: require('./materials'),
     messages: require('./messages'),
+    sessions: require('./sessions'),
     student_answers: require('./student_answers'),
     students: require('./students'),
     taught_disciplines: require('./taught_disciplines'),
