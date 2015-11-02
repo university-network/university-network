@@ -55,8 +55,8 @@ function getGroupList(params, callback) {
     var query = [
         'SELECT',
         //'   s.id,',
-       // '   s.group_id,',
-       // '   u.id,',
+        // '   s.group_id,',
+        // '   u.id,',
         '   u.name,',
         '   g.cipher',
         'FROM students s',

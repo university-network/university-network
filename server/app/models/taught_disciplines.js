@@ -14,7 +14,7 @@ function getAll(callback) {
         'JOIN groups g',
         'ON td.group_id = g.id',
         'JOIN users u',
-        'ON t.user_id = u.id',
+        'ON t.user_id = u.id'
     ].join('\n');
 
     var data = [];
@@ -29,6 +29,31 @@ function getAll(callback) {
     });
 }
 
+function createTaughtDiscipline(params, callback) {
+    var query = [
+        'INSERT INTO taught_disciplines',
+        '   (teacher_id, group_id, discipline_id)',
+        'VALUES',
+        '   ($1, $2, $3)'
+    ].join('\n');
+
+    var data = [
+        params.teacher_id,
+        params.group_id,
+        params.discipline_id
+    ];
+
+    db.query(query, data, function (err, result, done) {
+        done();
+
+        if (err) {
+            return callback(err);
+        }
+        callback(err, result);
+    });
+}
+
 module.exports = {
-    getAll: getAll
+    getAll: getAll,
+    create: createTaughtDiscipline
 };

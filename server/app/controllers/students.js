@@ -13,14 +13,22 @@ function getAllStudents(req, res, next) {
 
 function validateStudent(req, res, next) {
     var schema = {
-        query: {
-            group_id: {
-                notEmpty: validator.messages.notEmpty,
-                isInt: validator.messages.isInt
-            },
-            user_id: {
-                notEmpty: validator.messages.notEmpty,
-                isInt: validator.messages.isInt
+        body: {
+            type: 'object',
+            required: ['student'],
+            properties: {
+                student: {
+                    type: 'object',
+                    required: ['user_id', 'group_id'],
+                    properties: {
+                        group_id: {
+                            type: 'int'
+                        },
+                        user_id: {
+                            type: 'int'
+                        }
+                    }
+                }
             }
         }
     };
@@ -30,8 +38,8 @@ function validateStudent(req, res, next) {
 
 function createStudent(req, res, next) {
     var params = {
-        group_id: req.body.group_id,
-        user_id:req.body.user_id
+        group_id: req.body.student.group_id,
+        user_id: req.body.student.user_id
     };
 
     students.create(params, function (error, result) {
@@ -47,9 +55,12 @@ function createStudent(req, res, next) {
 function validateGroup(req, res, next) {
     var schema = {
         query: {
-            group_id: {
-                notEmpty: validator.messages.notEmpty,
-                isInt: validator.messages.isInt
+            type: 'object',
+            required: ['group_id'],
+            properties: {
+                group_id: {
+                    type: 'int'
+                }
             }
         }
     };
