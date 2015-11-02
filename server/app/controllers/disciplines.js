@@ -13,10 +13,38 @@ function getAllDisciplines(req, res, next) {
 
 function validateGroupSchedule(req, res, next) {
     var schema = {
-        query: {
-            group_id: {
-                notEmpty: validator.messages.notEmpty,
-                isInt: validator.messages.isInt
+        body: {
+            type: 'object',
+            required: ['group_id'],
+            properties: {
+                group_id: {
+                    type: 'int'
+                }
+            }
+        }
+    };
+
+    return validator.middleware(req, next, schema);
+}
+
+function validateDiscipline(req, res, next) {
+
+    var schema = {
+        body: {
+            type: 'object',
+            required: ['discipline'],
+            properties: {
+                article: {
+                    type: 'object',
+                    required: ['discipline_name'],
+                    properties: {
+                        discipline_name: {
+                            type: 'string',
+                            minLength: 3,
+                            maxLength: 80
+                        }
+                    }
+                }
             }
         }
     };
@@ -41,7 +69,7 @@ function getGroupSchedule(req, res, next) {
 
 function createDiscipline(req, res, next) {
     var params = {
-        name: req.body.discipline_name
+        name: req.body.discipline.discipline_name
     };
 
     disciplines.create(params, function (error, result) {
@@ -56,6 +84,6 @@ function createDiscipline(req, res, next) {
 
 module.exports = {
     index: getAllDisciplines,
-    create: createDiscipline,
+    create: [validateDiscipline, createDiscipline],
     schedule: [validateGroupSchedule, getGroupSchedule]
 };

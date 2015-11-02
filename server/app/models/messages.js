@@ -23,6 +23,35 @@ function getAll(callback) {
     });
 }
 
+function createMessage(params, callback) {
+    var query = [
+        'INSERT INTO messages',
+        '   (sender_id,' +
+        '   receiver_id,' +
+        '   message,' +
+        '   sending_time)',
+        'VALUES',
+        '   ($1, $2, $3, $4)'
+    ].join('\n');
+
+    var data = [
+        params.sender_id,
+        params.receiver_id,
+        params.message,
+        params.sending_time
+    ];
+
+    db.query(query, data, function (err, result, done) {
+        done();
+
+        if (err) {
+            return callback(err);
+        }
+        callback(err, result);
+    });
+}
+
 module.exports = {
-    getAll: getAll
+    getAll: getAll,
+    create: createMessage
 };

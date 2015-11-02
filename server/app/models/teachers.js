@@ -49,7 +49,30 @@ function getStudentsTeachers(params, callback) {
     });
 }
 
+function createTeacher(params, callback) {
+    var query = [
+        'INSERT INTO teachers',
+        '   (user_id)',
+        'VALUES',
+        '   ($1)'
+    ].join('\n');
+
+    var data = [
+        params.user_id
+    ];
+
+    db.query(query, data, function (err, result, done) {
+        done();
+
+        if (err) {
+            return callback(err);
+        }
+        callback(err, result);
+    });
+}
+
 module.exports = {
     getAll: getAll,
-    getStudentsTeachers: getStudentsTeachers
+    getStudentsTeachers: getStudentsTeachers,
+    create: createTeacher
 };

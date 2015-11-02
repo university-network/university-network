@@ -21,6 +21,30 @@ function getAll(callback) {
     });
 }
 
+function createGroup(params, callback) {
+    var query = [
+        'INSERT INTO groups',
+        '   (cipher, mentor_id)',
+        'VALUES',
+        '   ($1, $2)'
+    ].join('\n');
+
+    var data = [
+        params.cipher,
+        params.mentor_id
+    ];
+
+    db.query(query, data, function (err, result, done) {
+        done();
+
+        if (err) {
+            return callback(err);
+        }
+        callback(err, result);
+    });
+}
+
 module.exports = {
-    getAll: getAll
+    getAll: getAll,
+    create: createGroup
 };

@@ -42,7 +42,7 @@ function createSession(req, res, next) {
             return next(err);
         }
         if (!user) {
-            var error = new Error;
+            var error = new Error('Invalid email or password');
             error.status = 401;
             return next(error);
         }
