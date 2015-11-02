@@ -2,7 +2,7 @@ module.exports = {
     actions: require('./actions'),
     articles: require('./articles'),
     disciplines: require('./disciplines'),
-    groups:require('./groups'),
+    groups: require('./groups'),
     log_events: require('./log_events'),
     materials: require('./materials'),
     messages: require('./messages'),

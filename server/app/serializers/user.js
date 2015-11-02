@@ -18,7 +18,7 @@ function serializeUsers(users) {
 }
 
 function generateToken(user) {
-    var payload={
+    var payload = {
         id: user.id,
         access_level: user.access_level
     };

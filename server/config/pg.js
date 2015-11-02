@@ -6,7 +6,7 @@ function query(querystring, data, callaback) {
         if (err) {
             return console.error('error fetching client from pool', err);
         }
-        client.query(querystring, data, function(error, result) {
+        client.query(querystring, data, function (error, result) {
             callaback(error, result, done);
         });
     });

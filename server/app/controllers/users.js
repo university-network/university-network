@@ -21,7 +21,7 @@ function validateUser(req, res, next) {
             properties: {
                 user: {
                     type: 'object',
-                    required: ['name', 'email', 'access_level','login', 'password'],
+                    required: ['name', 'email', 'access_level', 'login', 'password'],
                     properties: {
                         name: {
                             type: 'string',
@@ -67,6 +67,11 @@ function createUser(req, res, next) {
     };
 
     registration.register(params, function (err, createdUser) {
+        if (err && err.message == 'Record duplication') {
+            var duplicationError = new Error('Record duplication');
+            duplicationError.status = 422;
+            return next(duplicationError);
+        }
         if (err) {
             return next(err);
         }

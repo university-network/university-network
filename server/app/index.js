@@ -18,6 +18,6 @@ process.on('uncaughtException', function (err, req, res) {
     console.log(err.stack);
 });
 
-process.on('SIGINT', function() {
+process.on('SIGINT', function () {
     process.exit();
 });
