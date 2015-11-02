@@ -10,14 +10,14 @@ function validateCredentials(params, callback) {
         if (!actualUser) {
             return callback(null, null);
         }
-        bcrypt.compare(params.password, actualUser.password_hash, function(err, equal){
-            if(err){
+        bcrypt.compare(params.password, actualUser.password_hash, function (err, equal) {
+            if (err) {
                 return callback(err);
             }
-            if(!equal){
-                return callback(null,null);
+            if (!equal) {
+                return callback(null, null);
             }
-            callback(null,actualUser);
+            callback(null, actualUser);
         });
     });
 }

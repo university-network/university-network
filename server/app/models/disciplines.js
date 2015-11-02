@@ -65,5 +65,5 @@ function createDiscipline(params, callback) {
 module.exports = {
     getAll: getAll,
     create: createDiscipline,
-    getSchedule:getGroupSchedule
+    getSchedule: getGroupSchedule
 };

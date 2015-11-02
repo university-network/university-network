@@ -16,6 +16,10 @@ function registerUser(params, callback) {
                 password_hash: hash
             };
             users.create(user_params, function (err, result) {
+                if (err && err.code == '23505') {
+                    var error = new Error('Record duplication');
+                    return callback(error);
+                }
                 if (err) {
                     return callback(err);
                 }
