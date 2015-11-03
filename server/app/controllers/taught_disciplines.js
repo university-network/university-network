@@ -3,6 +3,7 @@ var taught_disciplines = require('../models/taught_disciplines');
 function getAllTaughtDisciplines(req, res, next) {
     taught_disciplines.getAll(function (error, result) {
         if (error) {
+            console.error('error running query', error);
             return next(error);
         }
         res.json(result.rows);
@@ -46,10 +47,11 @@ function createTaughtDiscipline(req, res, next) {
 
     taught_disciplines.create(params, function (error, result) {
         if (error) {
+            console.error('error running query', error);
             return next(error);
         }
-        var createdTaughtDiscipline = result.rows[0];
-        res.status(201).json(createdTaughtDiscipline);
+        res.status(201);
+        res.json(result.rows[0]);
     });
 }
 

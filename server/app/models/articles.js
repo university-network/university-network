@@ -3,19 +3,12 @@ db = require('../../config/pg');
 function getAll(callback) {
     var query = [
         'SELECT',
-        '   a.id,',
-        '   a.name AS article_name,',
-        '   u.id AS author_id,',
-        '   u.name AS author_name,',
-        '   d.discipline_name,',
-        '   a.article',
-        'FROM articles a',
-        'JOIN teachers t',
-        '   ON a.teacher_id = t.id',
-        'JOIN users u',
-        '   ON t.user_id = u.id',
-        'JOIN disciplines d',
-        '   ON d.id = a.discipline_id'
+        '   id,',
+        '   name',
+        '   teacher_id,',
+        '   discipline_id,',
+        '   article',
+        'FROM articles'
     ].join('\n');
 
     var data = [];
