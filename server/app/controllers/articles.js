@@ -3,7 +3,6 @@ var articles = require('../models/articles');
 function getAllArticles(req, res, next) {
     users.getAll(function (error, result) {
         if (error) {
-            console.error('error running query', error);
             return next(error);
         }
         res.json(result.rows);
@@ -55,11 +54,10 @@ function createArticle(req, res, next) {
 
     articles.create(params, function (error, result) {
         if (error) {
-            console.error('error running query', error);
             return next(error);
         }
-        res.status(201);
-        res.json(result.rows[0]);
+        var createdArticle = result.rows[0];
+        res.status(201).json(createdArticle);
     });
 }
 
