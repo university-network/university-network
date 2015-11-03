@@ -4,6 +4,7 @@ var validator = require('../../lib/validator');
 function getAllDisciplines(req, res, next) {
     disciplines.getAll(function (error, result) {
         if (error) {
+            console.error('error running query', error);
             return next(error);
         }
         res.json(result.rows);
@@ -12,7 +13,7 @@ function getAllDisciplines(req, res, next) {
 
 function validateGroupSchedule(req, res, next) {
     var schema = {
-        params: {
+        body: {
             type: 'object',
             required: ['group_id'],
             properties: {
@@ -33,7 +34,7 @@ function validateDiscipline(req, res, next) {
             type: 'object',
             required: ['discipline'],
             properties: {
-                discipline: {
+                article: {
                     type: 'object',
                     required: ['discipline_name'],
                     properties: {
@@ -54,11 +55,12 @@ function validateDiscipline(req, res, next) {
 function getGroupSchedule(req, res, next) {
 
     var params = {
-        group_id: req.params.group_id
+        group_id: req.query.group_id
     };
 
     disciplines.getSchedule(params, function (error, result) {
         if (error) {
+            console.error('error running query', error);
             return next(error);
         }
         res.json(result.rows);
@@ -72,10 +74,11 @@ function createDiscipline(req, res, next) {
 
     disciplines.create(params, function (error, result) {
         if (error) {
+            console.error('error running query', error);
             return next(error);
         }
-        var createdDiscipline = result.rows[0];
-        res.status(201).json(createdDiscipline);
+        res.status(201);
+        res.json(result.rows[0]);
     });
 }
 

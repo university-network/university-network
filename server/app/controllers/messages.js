@@ -3,6 +3,7 @@ var messages = require('../models/messages');
 function getAllMessages(req, res, next) {
     messages.getAll(function (error, result) {
         if (error) {
+            console.error('error running query', error);
             return next(error);
         }
         res.json(result.rows);
@@ -52,10 +53,11 @@ function createMessage(req, res, next) {
 
     messages.create(params, function (error, result) {
         if (error) {
+            console.error('error running query', error);
             return next(error);
         }
-        var createdMessage = result.rows[0];
-        res.status(201).json(createdMessage);
+        res.status(201);
+        res.json(result.rows[0]);
     });
 }
 

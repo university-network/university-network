@@ -4,6 +4,7 @@ var validator = require('../../lib/validator');
 function getAllStudents(req, res, next) {
     students.getAll(function (error, result) {
         if (error) {
+            console.error('error running query', error);
             return next(error);
         }
         res.json(result.rows);
@@ -43,16 +44,17 @@ function createStudent(req, res, next) {
 
     students.create(params, function (error, result) {
         if (error) {
+            console.error('error running query', error);
             return next(error);
         }
-        var createdStudent = result.rows[0];
-        res.status(201).json(createdStudent);
+        res.status(201);
+        res.json(result.rows[0]);
     });
 }
 
 function validateGroup(req, res, next) {
     var schema = {
-        params: {
+        query: {
             type: 'object',
             required: ['group_id'],
             properties: {
@@ -66,14 +68,15 @@ function validateGroup(req, res, next) {
     return validator.middleware(req, next, schema);
 }
 
-function getAllByGroupId(req, res, next) {
+function getGroupList(req, res, next) {
 
     var params = {
-        group_id: req.params.group_id
+        group_id: req.query.group_id
     };
 
-    students.getAllByGroupId(params, function (error, result) {
+    students.getGroup(params, function (error, result) {
         if (error) {
+            console.error('error running query', error);
             return next(error);
         }
         res.json(result.rows);
@@ -83,6 +86,6 @@ function getAllByGroupId(req, res, next) {
 module.exports = {
     index: getAllStudents,
     create: [validateStudent, createStudent],
-    getStudentsByGroup: [validateGroup, getAllByGroupId]
+    grouplist: [validateGroup, getGroupList]
 };
 

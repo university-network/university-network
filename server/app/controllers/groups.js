@@ -1,9 +1,10 @@
-var groups = require('../../models/groups');
-var validator = require('../../../lib/validator');
+var groups = require('../models/groups');
+var validator = require('../../lib/validator');
 
 function getAllGroups(req, res, next) {
     groups.getAll(function (error, result) {
         if (error) {
+            console.error('error running query', error);
             return next(error);
         }
         res.json(result.rows);
@@ -45,16 +46,16 @@ function createGroup(req, res, next) {
 
     groups.create(params, function (error, result) {
         if (error) {
+            console.error('error running query', error);
             return next(error);
         }
-        var createdGroup = result.rows[0];
-        res.status(201).json(createdGroup);
+        res.status(201);
+        res.json(result.rows[0]);
     });
 }
 
 module.exports = {
     index: getAllGroups,
-    create: [validateGroup, createGroup],
-    students: require('./students')
+    create: [validateGroup, createGroup]
 };
 
