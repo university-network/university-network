@@ -3,7 +3,6 @@ var materials = require('../models/materials');
 function getAllMaterials(req, res, next) {
     materials.getAll(function (error, result) {
         if (error) {
-            console.error('error running query', error);
             return next(error);
         }
         res.json(result.rows);
@@ -52,11 +51,10 @@ function createMaterial(req, res, next) {
 
     materials.create(params, function (error, result) {
         if (error) {
-            console.error('error running query', error);
             return next(error);
         }
-        res.status(201);
-        res.json(result.rows[0]);
+        var createdMaterial = result.rows[0];
+        res.status(201).json(createdMaterial);
     });
 }
 

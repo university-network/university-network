@@ -51,20 +51,15 @@ function createStudent(params, callback) {
     });
 }
 
-function getGroupList(params, callback) {
+function getAllByGroupId(params, callback) {
     var query = [
         'SELECT',
-        //'   s.id,',
-        // '   s.group_id,',
-        // '   u.id,',
-        '   u.name,',
-        '   g.cipher',
+        '   s.id,',
+        '   u.name',
         'FROM students s',
         'LEFT JOIN users u',
-        'ON s.user_id = u.id',
-        'LEFT JOIN groups g',
-        'ON s.group_id = g.id',
-        'WHERE g.id = $1'
+        '   ON s.user_id = u.id',
+        'WHERE s.group_id = $1'
     ].join('\n');
 
     var data = [params.group_id];
@@ -82,5 +77,5 @@ function getGroupList(params, callback) {
 module.exports = {
     getAll: getAll,
     create: createStudent,
-    getGroup: getGroupList
+    getAllByGroupId: getAllByGroupId
 };
