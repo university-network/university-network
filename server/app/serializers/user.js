@@ -1,14 +1,19 @@
 var jwt = require('../../lib/token');
 
 function serializeUser(user) {
-    return {
-        id: user.id,
-        name: user.name,
-        photo: user.photo,
-        email: user.email,
-        role: user.role,
-        token: generateToken(user)
-    };
+    if (user !== null && typeof user === 'object') {
+        return {
+            id: user.id,
+            name: user.name,
+            photo: user.photo,
+            email: user.email,
+            role: user.role,
+            token: generateToken(user)
+        };
+    }
+    else {
+        return null;
+    }
 }
 
 function serializeUsers(users) {
