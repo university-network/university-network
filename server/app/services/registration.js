@@ -11,7 +11,7 @@ function registerUser(params, callback) {
                 name: params.name,
                 email: params.email,
                 photo: params.photo,
-                access_level: params.access_level,
+                role: params.role,
                 login: params.login,
                 password_hash: hash
             };

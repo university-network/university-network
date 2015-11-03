@@ -27,7 +27,7 @@ function createUser(params, callback) {
         '   (name,',
         '   email,',
         '   photo,',
-        '   access_level,',
+        '   role,',
         '   login,',
         '   password_hash)',
         'VALUES',
@@ -37,14 +37,14 @@ function createUser(params, callback) {
         '   name,',
         '   email,',
         '   photo,',
-        '   access_level'
+        '   role'
     ].join('\n');
 
     var data = [
         params.name,
         params.email,
         params.photo,
-        params.access_level,
+        params.role,
         params.login,
         params.password_hash
     ];
@@ -67,7 +67,7 @@ function findUserByEmail(email, callback) {
         '   email,',
         '   photo,',
         '   login,',
-        '   access_level,',
+        '   role,',
         '   password_hash',
         'FROM users',
         'WHERE email = $1'

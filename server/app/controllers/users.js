@@ -21,7 +21,7 @@ function validateUser(req, res, next) {
             properties: {
                 user: {
                     type: 'object',
-                    required: ['name', 'email', 'access_level', 'login', 'password'],
+                    required: ['name', 'email', 'role', 'login', 'password'],
                     properties: {
                         name: {
                             type: 'string',
@@ -34,8 +34,8 @@ function validateUser(req, res, next) {
                             minLength: 3,
                             maxLength: 255
                         },
-                        access_level: {
-                            type: 'int'
+                        role: {
+                            enum: ['student', 'teacher', 'admin']
                         },
                         login: {
                             type: 'string',
@@ -61,7 +61,7 @@ function createUser(req, res, next) {
         name: req.body.user.name,
         email: req.body.user.email,
         photo: req.body.user.photo,
-        access_level: req.body.user.access_level,
+        role: req.body.user.role,
         login: req.body.user.login,
         password: req.body.user.password
     };

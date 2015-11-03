@@ -6,7 +6,7 @@ function serializeUser(user) {
         name: user.name,
         photo: user.photo,
         email: user.email,
-        access_level: user.access_level,
+        role: user.role,
         token: generateToken(user)
     };
 }
@@ -20,7 +20,7 @@ function serializeUsers(users) {
 function generateToken(user) {
     var payload = {
         id: user.id,
-        access_level: user.access_level
+        role: user.role
     };
     return jwt.generate(payload);
 }
