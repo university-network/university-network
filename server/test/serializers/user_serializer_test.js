@@ -45,7 +45,7 @@ describe('UserSerializer', function () {
             });
 
             it('returns null', function () {
-                expect(userSerializer.serializeOne(user)).to.equal(expectedUser);
+                expect(userSerializer.serializeOne(user)).to.deep.equal(expectedUser);
             });
         });
     });
