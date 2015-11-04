@@ -16,7 +16,8 @@
   "devDependencies": {
     "chai": "^3.4.0",
     "mocha": "^2.3.3",
-    "mockery": "^1.4.0"
+    "proxyquire": "^1.7.3",
+    "sinon": "^1.17.2"
   },
   "scripts": {
     "test": "node_modules/.bin/mocha test"
