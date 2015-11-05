@@ -1,11 +1,20 @@
+var _ = require('lodash');
+
 function serializeDiscipline(discipline) {
-    return {
-        id: discipline.id,
-        name: discipline.name
-    };
+    if (discipline === null || !_.isObject(discipline)) {
+        return null;
+    }
+        return {
+            id: discipline.id,
+            name: discipline.name
+        };
 }
 
 function serializeDisciplines(disciplines) {
+    if (!disciplines || !_.isFunction(disciplines.map)) {
+        return null;
+    }
+
     return disciplines.map(function (discipline) {
         return serializeDiscipline(discipline);
     });

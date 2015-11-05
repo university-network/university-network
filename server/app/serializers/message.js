@@ -1,14 +1,23 @@
+var _ = require('lodash');
+
 function serializeMessage(message) {
-    return {
-        id: message.id,
-        sender: message.sender,
-        receiver: message.receiver,
-        message: message.message,
-        sending_time: message.sending_time,
-    };
+    if (message === null || !_.isObject(message)) {
+        return null;
+    }
+        return {
+            id: message.id,
+            sender: message.sender,
+            receiver: message.receiver,
+            message: message.message,
+            sending_time: message.sending_time
+        };
 }
 
 function serializeMessages(messages) {
+    if (!messages || !_.isFunction(messages.map)) {
+        return null;
+    }
+
     return messages.map(function (message) {
         return serializeMessage(message);
     });

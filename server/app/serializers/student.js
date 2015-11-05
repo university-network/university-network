@@ -1,11 +1,22 @@
+var _ = require('lodash');
+
 function serializeStudent(student) {
-    return {
-        id: student.id,
-        group: student.group
-    };
+    if (student === null || !_.isObject(student)) {
+        return null;
+    }
+        return {
+            id: student.id,
+            group: student.group,
+            name: student.name,
+            email: student.email
+        };
 }
 
 function serializeStudents(students) {
+    if (!students || !_.isFunction(students.map)) {
+        return null;
+    }
+
     return students.map(function (student) {
         return serializeStudent(student);
     });
