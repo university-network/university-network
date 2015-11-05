@@ -5,7 +5,7 @@ var FactoryGirl = require('../factories');
 
 describe('GroupSerializer', function () {
     var buildGroup = function (group) {
-        return _.chain(group).clone().value();
+        return _.clone(group);
     };
 
     var group = FactoryGirl.create('group').attributes();

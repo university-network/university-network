@@ -5,7 +5,7 @@ var FactoryGirl = require('../factories');
 
 describe('DisciplineSerializer', function () {
     var buildDiscipline = function (discipline) {
-        return _.chain(discipline).clone().value();
+        return _.clone(discipline);
     };
 
     var discipline = FactoryGirl.create('discipline').attributes();

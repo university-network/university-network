@@ -2,7 +2,7 @@ var jwt = require('../../lib/token');
 var _ = require('lodash');
 
 function serializeUser(user) {
-    if (user === null || !_.isObject(user)) {
+    if (!user || !_.isObject(user)) {
         return null;
     }
 
