@@ -1,14 +1,15 @@
 var _ = require('lodash');
 
 function serializeTaughtDiscipline(taught_discipline) {
-    if (taught_discipline === null || !_.isObject(taught_discipline)) {
+    if (!taught_discipline || !_.isObject(taught_discipline)) {
         return null;
     }
-        return {
-            discipline: taught_discipline.discipline,
-            group: taught_discipline.group,
-            teacher: taught_discipline.teacher
-        };
+
+    return {
+        discipline: taught_discipline.discipline,
+        group: taught_discipline.group,
+        teacher: taught_discipline.teacher
+    };
 }
 
 function serializeTaughtDisciplines(taught_disciplines) {

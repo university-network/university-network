@@ -1,14 +1,15 @@
 var _ = require('lodash');
 
 function serializeGroup(group) {
-    if (group === null || !_.isObject(group)) {
+    if (!group || !_.isObject(group)) {
         return null;
     }
-        return {
-            id: group.id,
-            cipher: group.cipher,
-            mentor: group.mentor
-        };
+
+    return {
+        id: group.id,
+        cipher: group.cipher,
+        mentor: group.mentor
+    };
 }
 
 function serializeGroups(groups) {

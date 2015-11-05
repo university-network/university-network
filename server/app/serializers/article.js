@@ -1,7 +1,7 @@
 var _ = require('lodash');
 
 function serializeArticle(article) {
-    if (article === null || !_.isObject(article)) {
+    if (!article || !_.isObject(article)) {
         return null;
     }
 

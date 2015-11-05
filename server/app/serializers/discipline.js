@@ -1,13 +1,14 @@
 var _ = require('lodash');
 
 function serializeDiscipline(discipline) {
-    if (discipline === null || !_.isObject(discipline)) {
+    if (!discipline || !_.isObject(discipline)) {
         return null;
     }
-        return {
-            id: discipline.id,
-            name: discipline.name
-        };
+
+    return {
+        id: discipline.id,
+        name: discipline.name
+    };
 }
 
 function serializeDisciplines(disciplines) {

@@ -1,15 +1,16 @@
 var _ = require('lodash');
 
 function serializeStudent(student) {
-    if (student === null || !_.isObject(student)) {
+    if (!student || !_.isObject(student)) {
         return null;
     }
-        return {
-            id: student.id,
-            group: student.group,
-            name: student.name,
-            email: student.email
-        };
+
+    return {
+        id: student.id,
+        group: student.group,
+        name: student.name,
+        email: student.email
+    };
 }
 
 function serializeStudents(students) {
