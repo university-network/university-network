@@ -4,12 +4,12 @@ var _ = require('lodash');
 var FactoryGirl = require('../factories');
 
 describe('TaughtDisciplineSerializer', function () {
-    var buildTaughtDiscipline = function (taught_discipline) {
-        return _.clone(taught_discipline);
+    var buildTaughtDiscipline = function (taughtDiscipline) {
+        return _.clone(taughtDiscipline);
     };
 
-    var taught_discipline = FactoryGirl.create('taught_discipline').attributes();
-    var expectedTaughtDiscipline = buildTaughtDiscipline(taught_discipline);
+    var taughtDiscipline = FactoryGirl.create('taught_discipline').attributes();
+    var expectedTaughtDiscipline = buildTaughtDiscipline(taughtDiscipline);
 
     describe('#serializeOne(taught_discipline)', function () {
         it('is a function', function () {
@@ -24,7 +24,7 @@ describe('TaughtDisciplineSerializer', function () {
 
         describe('when taught_discipline is valid', function () {
             it('returns null', function () {
-                expect(taughtDisciplineSerializer.serializeOne(taught_discipline)).to.deep.equal(expectedTaughtDiscipline);
+                expect(taughtDisciplineSerializer.serializeOne(taughtDiscipline)).to.deep.equal(expectedTaughtDiscipline);
             });
         });
     });
