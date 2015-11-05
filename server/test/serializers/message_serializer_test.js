@@ -5,7 +5,7 @@ var FactoryGirl = require('../factories');
 
 describe('MessageSerializer', function () {
     var buildMessage = function (message) {
-        return _.chain(message).clone().value();
+        return _.clone(message);
     };
 
     var message = FactoryGirl.create('message').attributes();

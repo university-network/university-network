@@ -5,7 +5,7 @@ var FactoryGirl = require('../factories');
 
 describe('TeacherSerializer', function () {
     var buildTeacher = function (teacher) {
-        return _.chain(teacher).clone().value();
+        return _.clone(teacher);
     };
 
     var teacher = FactoryGirl.create('teacher').attributes();

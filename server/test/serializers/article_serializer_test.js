@@ -5,7 +5,7 @@ var FactoryGirl = require('../factories');
 
 describe('ArticleSerializer', function () {
     var buildArticle = function (article) {
-        return _.chain(article).clone().value();
+        return _.clone(article);
     };
 
     var article = FactoryGirl.create('article').attributes();
