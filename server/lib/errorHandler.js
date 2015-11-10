@@ -25,12 +25,10 @@ function databaseHandler(err, req, res, next) {
 }
 
 function handler400(err, req, res, next) {
-    var message;
     if (err.hasOwnProperty('errors')) {
-        message = err.errors;
-    } else {
-        message = err.message || 'Bad request';
+        return res.status(400).json(err.errors);
     }
+    var message = err.message || 'Bad request';
     res.status(400).json([message]);
 }
 

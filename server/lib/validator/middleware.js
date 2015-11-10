@@ -1,5 +1,6 @@
 var validator = require('validator');
 var validateJSON = require('jsonschema').validate;
+var _ = require('lodash');
 
 function validateMiddleware(req, next, schema) {
     var paramTypes = ['params', 'query'];
@@ -19,16 +20,25 @@ function validateMiddleware(req, next, schema) {
                 });
             });
         }
+    }).filter(function (error) {
+        return !!error;
     });
+
+    var jsonErrors = [];
 
     if (schema.hasOwnProperty('body')) {
         var validationResult = validateJSON(req.body, schema.body);
-        errors.concat(validationResult);
+        if (!validationResult.valid) {
+            jsonErrors = validationResult.errors.map(function (err) {
+                return err.property + " " + err.message;
+            });
+        }
     }
-    var flattenErrors = flatten(errors);
-    var invalidParams = flattenErrors.filter(function (error) {
+
+    var invalidParams = _.chain(errors).concat(jsonErrors).flattenDeep().filter(function (error) {
         return error && !error.valid;
-    });
+    }).value();
+
     if (invalidParams.length > 0) {
         var error = new Error;
         error.status = 400;
@@ -36,17 +46,6 @@ function validateMiddleware(req, next, schema) {
         return next(error);
     }
     next();
-}
-
-function flatten(array) {
-    var flat = [];
-    for (var i = 0, l = array.length; i < l; i++) {
-        var type = Object.prototype.toString.call(array[i]).split(' ').pop().split(']').shift().toLowerCase();
-        if (type) {
-            flat = flat.concat(/^(array|collection|arguments|object)$/.test(type) ? flatten(array[i]) : array[i]);
-        }
-    }
-    return flat;
 }
 
 module.exports = validateMiddleware;
