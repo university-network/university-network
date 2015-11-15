@@ -1,5 +1,6 @@
 var disciplines = require('../models/disciplines');
 var validator = require('../../lib/validator');
+var disciplineSerializer = require('../serializers/discipline');
 
 function getAllDisciplines(req, res, next) {
     disciplines.getAll(function (error, result) {
@@ -65,6 +66,26 @@ function getGroupSchedule(req, res, next) {
     });
 }
 
+function getStudentsSchedule(req, res, next) {
+    disciplines.getScheduleForStudent(req.user.id, function (error, result) {
+        if (error) {
+            return next(error);
+        }
+        var disciplines = disciplineSerializer.serializeMany(result.rows);
+        res.json(disciplines);
+    });
+}
+
+function getTeachersSchedule(req, res, next) {
+    disciplines.getScheduleForTeacher(req.user.id, function (error, result) {
+        if (error) {
+            return next(error);
+        }
+        var disciplines = disciplineSerializer.serializeMany(result.rows);
+        res.json(disciplines);
+    });
+}
+
 function createDiscipline(req, res, next) {
     var params = {
         name: req.body.discipline.discipline_name
@@ -82,5 +103,7 @@ function createDiscipline(req, res, next) {
 module.exports = {
     index: getAllDisciplines,
     create: [validateDiscipline, createDiscipline],
-    schedule: [validateGroupSchedule, getGroupSchedule]
+    schedule: [validateGroupSchedule, getGroupSchedule],
+    studentSchedule: getStudentsSchedule,
+    teacherSchedule: getTeachersSchedule
 };

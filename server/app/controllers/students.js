@@ -80,9 +80,19 @@ function getAllByGroupId(req, res, next) {
     });
 }
 
+function getStudentsGroup(req, res, next) {
+    students.getStudentsGroup(req.user.id, function (error, result) {
+        if (error) {
+            return next(error);
+        }
+        res.json(result.rows);
+    });
+}
+
 module.exports = {
     index: getAllStudents,
     create: [validateStudent, createStudent],
-    getStudentsByGroup: [validateGroup, getAllByGroupId]
+    getStudentsByGroup: [validateGroup, getAllByGroupId],
+    getStudentsGroup: getStudentsGroup
 };
 

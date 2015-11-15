@@ -1,4 +1,5 @@
 var articles = require('../models/articles');
+var articleSerializer = require('../serializers/article');
 
 function getAllArticles(req, res, next) {
     users.getAll(function (error, result) {
@@ -6,6 +7,27 @@ function getAllArticles(req, res, next) {
             return next(error);
         }
         res.json(result.rows);
+    });
+}
+
+function getArticlesByTeacher(req, res, next) {
+    articles.getByTeacher(req.user.id, function (error, result) {
+        if (error) {
+            return next(error);
+        }
+        var articles = articleSerializer.serializeMany(result.rows);
+        res.json(articles);
+    });
+}
+
+function getArticlesByDiscipline(req, res, next) {
+
+    articles.getByDiscipline(req.discipline.id, function (error, result) {
+        if (error) {
+            return next(error);
+        }
+        var articles = articleSerializer.serializeMany(result.rows);
+        res.json(articles);
     });
 }
 
@@ -63,6 +85,8 @@ function createArticle(req, res, next) {
 
 module.exports = {
     index: getAllArticles,
+    getByDiscipline: getArticlesByDiscipline,
+    getByTeacher: getArticlesByTeacher,
     create: [createArticle, validateArticle]
 };
 

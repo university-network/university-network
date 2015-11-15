@@ -7,9 +7,7 @@ function serializeStudent(student) {
 
     return {
         id: student.id,
-        group: student.group,
-        name: student.name,
-        email: student.email
+        name: student.name
     };
 }
 

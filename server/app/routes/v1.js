@@ -6,11 +6,18 @@ var auth = require('../../lib/auth');
 app.get('/api/v1/actions', controllers.actions.index);
 
 app.get('/api/v1/articles', controllers.articles.index);
+app.get('/api/v1/discipline/articles', controllers.articles.getByDiscipline);
 app.post('/api/v1/articles', controllers.articles.create);
 
 app.get('/api/v1/disciplines', controllers.disciplines.index);
 app.post('/api/v1/disciplines', controllers.disciplines.create);
 app.get('/api/v1/groups/:id/disciplines', controllers.disciplines.schedule);
+
+app.get('/api/v1/account/articles',    auth, controllers.account.articles.index);
+app.get('/api/v1/account/classmates',  auth, controllers.account.classmates.index);
+app.get('/api/v1/account/disciplines', auth, controllers.account.disciplines.index);
+
+app.get('/api/v1/teachers/:id/disciplines', auth, controllers.disciplines.teacherSchedule);
 
 app.get('/api/v1/groups', controllers.groups.index);
 app.post('/api/v1/groups', controllers.groups.create);

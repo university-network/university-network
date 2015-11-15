@@ -1,27 +1,27 @@
 var _ = require('lodash');
 
 function serializeArticle(article) {
-    if (!article || !_.isObject(article)) {
+    if (!_.isObject(article)) {
         return null;
     }
 
     return {
         id: article.id,
         name: article.name,
-        author: article.author,
-        discipline: article.discipline,
-        article: article.article
+        content: article.content,
+        author: {
+            id: article.teacher_id,
+            name: article.author_name
+        },
+        discipline: {
+            id: article.discipline_id,
+            name: article.discipline_name
+        }
     };
 }
 
 function serializeArticles(articles) {
-    if (!articles || !_.isFunction(articles.map)) {
-        return null;
-    }
-
-    return articles.map(function (article) {
-        return serializeArticle(article);
-    });
+    return _.map(articles, serializeArticle);
 }
 
 module.exports = {

@@ -74,8 +74,35 @@ function getAllByGroupId(params, callback) {
     });
 }
 
+function getAllClassmates(user_id, callback) {
+    var query = [
+        'SELECT',
+        'u.* ',
+        'FROM students s',
+        'JOIN students s2',
+        '   ON s2.group_id = s.group_id',
+        'JOIN users u ',
+        '   ON u.id=s2.user_id',
+        'WHERE',
+        '   s.user_id = $1',
+        '   AND s2.user_id <> s.user_id'
+    ].join('\n');
+
+    var data = [user_id];
+
+    db.query(query, data, function (err, result, done) {
+        done();
+
+        if (err) {
+            return callback(err);
+        }
+        callback(err, result.rows);
+    });
+}
+
 module.exports = {
     getAll: getAll,
     create: createStudent,
-    getAllByGroupId: getAllByGroupId
+    getAllByGroupId: getAllByGroupId,
+    getAllClassmates: getAllClassmates
 };

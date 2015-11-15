@@ -1,4 +1,5 @@
 module.exports = {
+    account: require('./account'),
     actions: require('./actions'),
     articles: require('./articles'),
     disciplines: require('./disciplines'),
