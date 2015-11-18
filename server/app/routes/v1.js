@@ -31,6 +31,7 @@ app.get('/api/v1/messages', controllers.messages.index);
 app.post('/api/v1/messages', controllers.messages.create);
 
 app.get('/api/v1/student_answers', controllers.student_answers.index);
+app.post('/api/v1/student_answers', controllers.student_answers.create);
 
 app.get('/api/v1/students', controllers.students.index);
 app.post('/api/v1/students', controllers.students.create);
@@ -44,7 +45,7 @@ app.post('/api/v1/teachers', controllers.teachers.create);
 
 app.get('/api/v1/tests', controllers.tests.index);
 
-app.get('/api/v1/test_questions', controllers.test_questions.index);
+app.get('/api/v1/tests/:id/questions', controllers.test_questions.test);
 
 app.get('/api/v1/users', auth, controllers.users.index);
 app.post('/api/v1/users', controllers.users.create);
